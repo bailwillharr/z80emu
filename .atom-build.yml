@@ -1,0 +1,2 @@
+cmd:
+    spasm -E -T -A z80emu.asm z80emu.8xp
