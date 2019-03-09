@@ -6,4 +6,4 @@ script:
       - make NO_APPSIGN=1 -j2
       - cp ./spasm ../spasm
       - cd ..
-      - make
+      - make travis
