@@ -1,5 +1,5 @@
+# Most of this file was copied from calc84maniac/tiboyce.
 language: cpp
-
 script:
       - git clone --recursive --depth 1 https://github.com/alberthdev/spasm-ng.git
       - cd spasm-ng
