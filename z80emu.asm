@@ -6,15 +6,12 @@
 ; ti84pce.inc will not be used in later versions. Instead, equates will be
 ; explicitly defined.
 #include "inc/ti84pce.inc"
-
 ; Gives us $FFFF bytes of ram. Last byte is at pixelShadow+65535 inclusive.
 vcpu_mem    .equ    pixelShadow
 ; Two bytes for the virtual program counter.
 vcpu_vpc    .equ    pixelShadow+65536
-; The rest of the registers can be the eZ80's registers in Z80 mode.
-
     .assume adl=1
-    .org userMem-2
+    .org userMem-2 ; Easy way to save 2 bytes.
     .db tExtTok,tAsm84CeCmp
     jp Start
     .db 1
@@ -39,36 +36,10 @@ vcpu_vpc    .equ    pixelShadow+65536
 Start:
     call _HomeUp
     call _ClrScrnFull
-    ld a,$00
-    ld (curCol),a
-    ld (curRow),a
+    call clear_vmem
 
-    ld hl,vcpu_mem
-    ld a,0
-ClearVMemLoop:
-    push af
-
-    ld a,0
-ClearVMemLoop2:
-    ld (hl),$00
-    inc hl
-
-    cp 255
-    jr z,ClearVMemLoop2End
-    inc a
-    jr ClearVMemLoop2
-ClearVMemLoop2End:
-
-    pop af
-    cp 255
-    jr z,ClearVMemLoopEnd
-    inc a
-    jr ClearVMemLoop
-ClearVMemLoopEnd:
-    ld hl,string_VRamCleared
-    call _PutS
-    call _GetKey
-    call _ClrScrnFull
+    ; Clean up
+    set graphDraw,(iy+graphFlags) ; Mark graph screen as dirty.
     ret
-string_VRamCleared:
-    .db "Virtual Ram Cleared!",0
+
+#include "memory.asm"
