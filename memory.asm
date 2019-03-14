@@ -1,7 +1,7 @@
 ; Author: Bailey Harrison
 ; File: memory.asm
-; This file contains the routines for managing the 64K of virtual
-; memory (whatever the emulated CPU can address at once).
+; This file contains the routines for managing the 64K of virtual memory
+; (whatever the emulated CPU can address at once).
 clear_vmem:
     ld hl,vcpu_mem
     ld a,0
@@ -23,3 +23,4 @@ _
     jp ---_
 _
     ret
+
