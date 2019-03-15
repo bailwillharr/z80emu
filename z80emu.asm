@@ -19,6 +19,7 @@ Start:
     call _HomeUp
     call _ClrScrnFull
     call clear_vmem
+    call __ClearVRam
 
     ; Clean up
     set graphDraw,(iy+graphFlags) ; Mark graph screen as dirty.
