@@ -16,14 +16,28 @@ vcpu_vpc    .equ    pixelShadow+65536
     .org userMem-2 ; Easy way to save 2 bytes.
     .db tExtTok,tAsm84CeCmp
 Start:
-    call _HomeUp
-    call _ClrScrnFull
+    di
+    call _RunIndicOff
+    call scr_setup_palette
+    call scr_clr_screen
+
+    ; initialize virtual environment
     call clear_vmem
-    call __ClearVRam
+    ld hl,vcpu_vpc
+    ld (hl),$0000
+
+    call _GetKey
 
     ; Clean up
     set graphDraw,(iy+graphFlags) ; Mark graph screen as dirty.
+    call scr_restore
+
+    ei
     ret
 
+; Subroutines
 #include "memory.asm"
+#include "screen.asm"
 
+; Everything after this line should be data.
+#include "rom.asm"
