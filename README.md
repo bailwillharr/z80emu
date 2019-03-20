@@ -5,7 +5,7 @@ I'm keeping this project private until it's in a usable state. Once it is, I'll 
 
 # Build instructions
 
-Assembly requires spasm-ng which can be found [here](github.com)
+Assembly requires spasm-ng which can be found [here](https://github.com/alberthdev/spasm-ng)
 
 ```bash
 spasm -E -A z80emu.asm Z80EMU.8xp
