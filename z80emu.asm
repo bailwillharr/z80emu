@@ -13,7 +13,7 @@ vcpu_mem    .equ    pixelShadow
 vcpu_vpc    .equ    pixelShadow+65536
 
     .assume adl=1
-    .org userMem-2 ; Easy way to save 2 bytes.
+    .org userMem-2 ; Easy way to save 2 bytes
     .db tExtTok,tAsm84CeCmp
 Start:
     di
@@ -21,12 +21,16 @@ Start:
     call scr_setup_palette
     call scr_clr_screen
 
-    ; initialize virtual environment
+    ; Initialize virtual environment
     call clear_vmem
     ld hl,vcpu_vpc
     ld (hl),$0000
 
-    call _GetKey
+    ; Wait for enter key
+_
+    call _GetCSC
+    cp skEnter
+    jr nz,-_
 
     ; Clean up
     set graphDraw,(iy+graphFlags) ; Mark graph screen as dirty.
