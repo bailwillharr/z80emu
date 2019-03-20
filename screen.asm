@@ -11,16 +11,10 @@ scr_setup_palette:
     ret
 
 scr_clr_screen:
-    ; Loops 9600 times as each byte holds 8 pixels (it's in 1bpp mode).
+    ld a,$00
     ld hl,vRam
-    ld de,9600 ; 9600
-_
-    ld (hl),$00
-    inc hl
-    dec de
-    ld a,d
-    or a,e
-    jp nz,-_
+    ld bc,9600
+    call _MemSet
     ret
 
 scr_restore:
