@@ -3,7 +3,7 @@
 
 I'm keeping this project private until it's in a usable state. Once it is, I'll open a Cemetech topic.
 
-# Build instructions
+## Build instructions
 
 Assembly requires spasm-ng which can be found [here](https://github.com/alberthdev/spasm-ng)
 

@@ -26,6 +26,26 @@ Start:
     ld hl,vcpu_vpc
     ld (hl),$0000
 
+    ld a,0
+    ld l,0
+    call scr_set_pixel
+    call _GetKey
+    ld a,1
+    ld l,1
+    call scr_set_pixel
+    call _GetKey
+    ld a,2
+    ld l,2
+    call scr_set_pixel
+    call _GetKey
+    ld a,3
+    ld l,3
+    call scr_set_pixel
+    call _GetKey
+    ld a,4
+    ld l,4
+    call scr_set_pixel
+
     ; Wait for enter key
 _
     call _GetCSC
@@ -45,3 +65,4 @@ _
 
 ; Everything after this line should be data.
 #include "rom.asm"
+
