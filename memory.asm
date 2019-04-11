@@ -9,7 +9,7 @@ _
 	push af
 	ld a, 0
 _
-	ld (hl), $FF
+	ld (hl), $00
 	inc hl
 	cp 255
 	jp z, _
